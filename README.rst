@@ -26,3 +26,4 @@ If you also want to minify it:
 Limitations
 -----------
 * Currently cssbuster will only bust the relative and absolute resources, not the full ones ``http://...``
+* This is an Alpha release, be aware!
