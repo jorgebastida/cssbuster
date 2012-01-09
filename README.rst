@@ -19,13 +19,3 @@ For a file named ``styles.css``::
 If you also want to minify it::
 
     $ csscachebuster styles.css --minified > styles.min.css
-
-
-
-
-
-s
-s
-s
-s
-s
