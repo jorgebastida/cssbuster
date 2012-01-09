@@ -11,15 +11,15 @@ Features
 Example
 -------
 
-``cssbuster`` only needs two arguments, the first one is the name of the CSS file
-you want to process, and the second one the path where ``cssbuster`` can locate the images.
+``cssbuster`` only needs two arguments. The first one is the name of the CSS file
+you want to process, and the second one the path where ``cssbuster`` can locate the resources.
 
-For a file named ``styles.css``::
+For a file named ``styles.css``:
 
     $ cssbuster styles.css ../img > styles.min.css
 
 
-If you also want to minify it::
+If you also want to minify it:
 
     $ cssbuster styles.css ../img --minified > styles.min.css
 
