@@ -44,7 +44,7 @@ def cache_bust_replacer(options, css_path, img_rel_path, resource_url,
 
 
 def main():
-    parser = OptionParser(usage="usage: %prog [options] css")
+    parser = OptionParser(usage="usage: %prog [options] css img")
 
     parser.add_option("-m", "--minified", action="store_true", dest="minified",
                       help="Minifi the css.")

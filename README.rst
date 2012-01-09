@@ -1,7 +1,7 @@
 csscachebuster
 ==============
 
-csscachebuster is a simple command line tool to invalidate (when it's necessary) external resources linked to a css file.
+cssbuster is a simple command line tool to invalidate (when it's necessary) external resources linked to a css file.
 
 Features
 --------
@@ -11,11 +11,18 @@ Features
 Example
 -------
 
+``cssbuster`` only needs two arguments, the first one is the name of the CSS file
+you want to process, and the second one the path where ``cssbuster`` can locate the images.
+
 For a file named ``styles.css``::
 
-    $ csscachebuster styles.css > styles.min.css
+    $ cssbuster styles.css ../img > styles.min.css
 
 
 If you also want to minify it::
 
-    $ csscachebuster styles.css --minified > styles.min.css
+    $ cssbuster styles.css ../img --minified > styles.min.css
+
+Limitations
+-----------
+* Currently cssbuster will only bust the relative and absolute resources, not the full ones ``http://...``
