@@ -10,6 +10,22 @@ Features
 
 Example
 -------
-.. code-block:: bash
+
+For a file named ``styles.css``::
 
     $ csscachebuster styles.css > styles.min.css
+
+
+If you also want to minify it::
+
+    $ csscachebuster styles.css --minified > styles.min.css
+
+
+
+
+
+s
+s
+s
+s
+s

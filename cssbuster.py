@@ -24,7 +24,7 @@ def cache_bust_replacer(options, css_path, img_rel_path, resource_url,
             if os.path.exists(test_path):
                 found = True
                 break
-        if found:
+        if found:s
             if test_path not in cache:
                 if options.sha1:
                     resource_file = open(test_path)
