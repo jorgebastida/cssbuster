@@ -87,7 +87,7 @@ def main():
     cssutils.replaceUrls(sheet, replacer, ignoreImportRules=True)
 
     # print the new css
-    print sheet.cssText
+    sys.stdout(sheet.cssText)
 
 if __name__ == "__main__":
     main()
