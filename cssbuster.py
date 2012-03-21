@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import os
+import re
 import sys
 import hashlib
 import logging
@@ -16,30 +17,37 @@ def cache_bust_replacer(options, css_path, img_rel_path, resource_url,
                         stderr=None, cache=None):
     stderr = stderr or sys.stderr
     cache = cache or resource_extra_cache
-    if not resource_url.startswith(('http://', 'https://')):
-        url = resource_url.split('/')
-        found = False
-        for i in xrange(len(url)):
-            test_path = os.path.join(img_rel_path, '/'.join(url[i:]))
-            if os.path.exists(test_path):
-                found = True
-                break
-        if found:
-            if test_path not in cache:
-                if options.sha1:
-                    resource_file = open(test_path)
-                    extra = hashlib.sha1(resource_file.read()).hexdigest()[:8]
-                    resource_file.close()
-                else:
-                    extra = int(os.stat(test_path).st_mtime)
-                cache[test_path] = extra
+
+    url = resource_url
+
+    if url.startswith(('http://', 'https://')):
+        url = url.split('/', 3)[-1]
+
+    url = url.split('/')
+
+    found = False
+
+    for i in xrange(len(url)):
+        test_path = os.path.join(img_rel_path, '/'.join(url[i:]))
+
+        if os.path.exists(test_path):
+            found = True
+            break
+    if found:
+        if test_path not in cache:
+            if options.sha1:
+                resource_file = open(test_path)
+                extra = hashlib.sha1(resource_file.read()).hexdigest()[:8]
+                resource_file.close()
             else:
-                extra = cache.get(test_path)
-            resource_url = "%s?%s" % (resource_url, extra)
+                extra = int(os.stat(test_path).st_mtime)
+            cache[test_path] = extra
         else:
-            stderr.write("WARNING: Resource %s not found\n" % css_path)
+            extra = cache.get(test_path)
+        resource_url = "%s?%s" % (resource_url, extra)
     else:
-        stderr.write("WARNING: Absolute url to %s\n" % resource_url)
+        stderr.write("WARNING: Resource %s not found. CSS File: %s\n" % (resource_url, css_path))
+
     return resource_url
 
 
@@ -87,7 +95,7 @@ def main():
     cssutils.replaceUrls(sheet, replacer, ignoreImportRules=True)
 
     # print the new css
-    sys.stdout(sheet.cssText)
+    sys.stdout.write(sheet.cssText)
 
 if __name__ == "__main__":
     main()
