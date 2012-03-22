@@ -28,8 +28,7 @@ def cache_bust_replacer(options, css_path, img_rel_path, resource_url,
     found = False
 
     for i in xrange(len(url)):
-        test_path = os.path.join(img_rel_path, '/'.join(url[i:]))
-
+        test_path = os.path.join(img_rel_path, '/'.join(url[:i]))
         if os.path.exists(test_path):
             found = True
             break
@@ -83,12 +82,15 @@ def main():
 
     # Create the parser
     parser = cssutils.CSSParser(log=log,
-                                raiseExceptions=False,
+                                raiseExceptions=True,
                                 parseComments=not options.minified,
                                 validate=False)
-
-    # Parse the original file
-    sheet = parser.parseFile(args[0])
+    try:
+        # Parse the original file
+        sheet = parser.parseFile(args[0])
+    except Exception, e:
+        sys.stderr.write('Error: %s %s\n' % (css_path, e.args[0]))
+        sys.exit(1)
 
     # Replace all the urls
     replacer = partial(cache_bust_replacer, options, css_path, img_rel_path)
