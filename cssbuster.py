@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 import os
-import re
 import sys
 import hashlib
 import logging
@@ -17,18 +16,17 @@ def cache_bust_replacer(options, css_path, img_rel_path, resource_url,
                         stderr=None, cache=None):
     stderr = stderr or sys.stderr
     cache = cache or resource_extra_cache
-
     url = resource_url
 
     if url.startswith(('http://', 'https://')):
         url = url.split('/', 3)[-1]
 
-    url = url.split('/')
+    url = [u for u in url.split('/') if u]
 
     found = False
 
     for i in xrange(len(url)):
-        test_path = os.path.join(img_rel_path, '/'.join(url[:i]))
+        test_path = os.path.join(img_rel_path, '/'.join(url[i:]))
         if os.path.exists(test_path):
             found = True
             break
