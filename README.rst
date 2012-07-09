@@ -7,6 +7,7 @@ Features
 --------
 * Invalidate external resources used on a css file.
 * Optionally minify the output css.
+* mtime and sha1 invalidation
 
 Example
 -------
@@ -22,6 +23,7 @@ For a file named ``styles.css``:
 If you also want to minify it:
 
     $ cssbuster styles.css ../img --minified > styles.min.css
+
 
 Limitations
 -----------

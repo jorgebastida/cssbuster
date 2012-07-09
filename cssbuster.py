@@ -8,6 +8,7 @@ from optparse import OptionParser
 
 import cssutils
 
+__version__ = '0.1.4'
 
 resource_extra_cache = {}
 
@@ -58,7 +59,14 @@ def main():
                       help=("Use sha1 insted the mtime (Most recent content "
                             "modification)"))
 
+    parser.add_option("-v", "--version", action="store_true", dest="version",
+            help="show program's version number and exit")
+
     (options, args) = parser.parse_args()
+
+    if options.version:
+        sys.stdout.write("%s\n" % __version__)
+        sys.exit(0)
 
     if len(args) == 0:
         parser.error("You must provide a css file ")

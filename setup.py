@@ -19,7 +19,7 @@ except ImportError:
 
 setup(
     name='cssbuster',
-    version='0.1.3',
+    version='0.1.4',
     url='https://github.com/jorgebastida/cssbuster',
     license='BSD',
     author='Jorge Bastida',
